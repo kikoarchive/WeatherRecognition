@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{% static 'index.js' %}"></script>
+    <title>WeatherRecognition</title>
+</head>
+<header class="header">
+    <h1>Розпізнавання погоди за зображенням</h1>
+</header>
+<div class="wrap">
+    <body class="body">
+    <div class="predictions">
+        {% if label %}  {% endif %}
+        {% if filePathName %}
+            <img class="img-thumbnail" src={{ filePathName }} alt='image_name'>
+            <h2>Погода на зображенні: {{ label }}</h2>
+            <h3>Впевненість: {{ probability }}%</h3>
+        {% endif %}
+        {% if error %} <span>{{ error }}</span> {% endif %}
+    </div>
+    <div class="upload-frame">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="upload-block">
+                <div class="title">
+                    <p>Оберіть файл для завантаження</p>
+                </div>
+                <div class="drop-zone">
+                    <label for="filePath" class="btn-file">
+                        <input id="filePath" type="file" name="filePath" class="upload-input"
+                               required onchange="getFileName(), imageValidation()" ondragover ="imageValidation()"/>
+                    </label>
+                    <span id="showName"></span>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="button" name="uploadbutton" onchange="imageValidation()">Завантажити файл</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+    <footer class="footer">
+        <p>
+            Виконав студент групи КН-42<br/>Каліта Вячеслав
+        </p>
+    </footer>
+</div>
+</html>
