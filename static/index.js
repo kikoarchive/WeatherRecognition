@@ -1,9 +1,3 @@
-$(document).ready(function () {
-    $('form input').change(function () {
-        $('form h1').text(this.files.length + " file selected");
-    });
-});
-
 function getFileName() {
     let file = document.getElementById('filePath');
     let filePath = file.value;

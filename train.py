@@ -24,7 +24,7 @@ names = {
 }
 for i in imgPath:
     try:
-        img = cv2.imread(i, cv2.IMREAD_COLOR)
+        img = cv2.imread(i)
         img = cv2.resize(img, (28, 28), interpolation=cv2.INTER_AREA)
         img = img_to_array(img)
         images.append(np.array(img))
@@ -57,7 +57,7 @@ model.fit(x_train, y_train, epochs=40)
 loss, accuracy = model.evaluate(x_test, y_test, batch_size=256)
 
 model.summary()
-model.save('model/prediction-model2.h5')
+model.save('model/prediction-model3.h5')
 
 result = model.predict(x_test[200:201])
 index = np.argmax(result)
